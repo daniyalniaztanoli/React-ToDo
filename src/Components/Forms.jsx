@@ -27,21 +27,24 @@ export const Forms = () => {
     
     
     
-    const Store_Handle_Value = () =>{
-        let newtodoitem = {
-            title:newtitle,
-            description:newdescription,
+    const Store_Handle_Value = () => {
+        if (!newtitle.trim() || !newdescription.trim()) {
+            alert("Please fill in both title and description.");
         }
-        if(Store_Handle_Value === ''){
-            alert("Please Enter Entire Field's")
+        else {
+            let newtodoitem = {
+                title: newtitle,
+                description: newdescription,
+            };
+            let updatedTodo = [...todo];
+            updatedTodo.push(newtodoitem);
+            settodo(updatedTodo);
+            localStorage.setItem("todolist", JSON.stringify(updatedTodo));
+            
+            setnewtitle("");
+            setnewdescription("");
         }
-        esle{
-        let updatedTodo = [...todo];
-        updatedTodo.push(newtodoitem);
-        settodo(updatedTodo);
-        localStorage.setItem("todolist",JSON.stringify(updatedTodo))
-        }
-    }
+    };    
     useEffect(() => {
             let savetodo = JSON.parse(localStorage.getItem("todolist"));
             if (savetodo) {
