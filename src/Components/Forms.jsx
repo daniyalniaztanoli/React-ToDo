@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import '../App.css'
 export const Forms = () => {
-    const [button, setbutton] = useState(false);
     const [todo, settodo] = useState([])
     const [newtitle, setnewtitle] = useState("")
     const [newdescription, setnewdescription] = useState("")
@@ -32,11 +31,16 @@ export const Forms = () => {
         let newtodoitem = {
             title:newtitle,
             description:newdescription,
-        }      
+        }
+        if(Store_Handle_Value === ''){
+            alert("Please Enter Entire Field's")
+        }
+        esle{
         let updatedTodo = [...todo];
         updatedTodo.push(newtodoitem);
         settodo(updatedTodo);
         localStorage.setItem("todolist",JSON.stringify(updatedTodo))
+        }
     }
     useEffect(() => {
             let savetodo = JSON.parse(localStorage.getItem("todolist"));
